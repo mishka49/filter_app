@@ -1,0 +1,27 @@
+steps:
+- type: filter
+  parameters:
+    inputs:
+    - WikiMatrix.en-ru.en
+    - WikiMatrix.en-ru.ru
+    outputs:
+    - en
+    - ru
+    filters:
+    - LengthRatioFilter:
+        threshold: 2
+        unit: word
+
+    - SentenceQuantityFilter:
+        threshold: 1
+      module: filters.sentence_quantity_filter
+
+    - CorrectLanguageFilter:
+        languages:
+        - en
+        - ru
+      module: filters.correct_language_filter
+
+    - ExistenceWordsFilter:
+      module: filters.existence_words_filter
+
